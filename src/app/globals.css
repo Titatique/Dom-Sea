@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   DOM & SEA — Design System
+   Palette inspirée des lignes de navigation maritime et de la signalétique
+   portuaire : profondeurs sombres, balises orange, blanc d'écume.
+   ============================================================================ */
+
+:root {
+  /* --- Couleurs de marque --- */
+  --color-abyss: #0b1620;       /* fond sombre profond */
+  --color-hull: #11212e;        /* surfaces sur fond sombre */
+  --color-hull-light: #16293a;  /* surfaces secondaires sur fond sombre */
+  --color-foam: #f7f5f0;        /* fond clair, blanc cassé chaud */
+  --color-foam-dim: #eeebe2;    /* fond clair secondaire */
+  --color-beacon: #c8651b;      /* accent signal — balise / conteneur */
+  --color-beacon-light: #e3893f;
+  --color-beacon-dark: #9c4d12;
+  --color-channel: #5b7a8c;     /* texte secondaire, lignes, gris-bleu */
+  --color-channel-light: #8fa6b4;
+  --color-deep: #1b3a4b;        /* bleu profond secondaire */
+
+  /* --- Tokens sémantiques (mode clair, par défaut sur le site public) --- */
+  --background: var(--color-foam);
+  --foreground: var(--color-abyss);
+  --surface: #ffffff;
+  --surface-muted: var(--color-foam-dim);
+  --border-subtle: #e2ddd2;
+  --text-muted: var(--color-channel);
+  --accent: var(--color-beacon);
+  --accent-foreground: #ffffff;
+  --success: #2f6e4f;
+  --warning: #b8860b;
+  --danger: #b3261e;
+
+  /* --- Typographie --- */
+  --font-display: var(--font-fjalla), system-ui, sans-serif;
+  --font-body: var(--font-source-serif), Georgia, serif;
+  --font-mono: var(--font-jetbrains), "Courier New", monospace;
+}
+
+.dark-section {
+  --background: var(--color-abyss);
+  --foreground: var(--color-foam);
+  --surface: var(--color-hull);
+  --surface-muted: var(--color-hull-light);
+  --border-subtle: #233544;
+  --text-muted: var(--color-channel-light);
+}
+
+@theme inline {
+  --color-abyss: var(--color-abyss);
+  --color-hull: var(--color-hull);
+  --color-hull-light: var(--color-hull-light);
+  --color-foam: var(--color-foam);
+  --color-foam-dim: var(--color-foam-dim);
+  --color-beacon: var(--color-beacon);
+  --color-beacon-light: var(--color-beacon-light);
+  --color-beacon-dark: var(--color-beacon-dark);
+  --color-channel: var(--color-channel);
+  --color-channel-light: var(--color-channel-light);
+  --color-deep: var(--color-deep);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border-subtle: var(--border-subtle);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-display);
+  --font-serif: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+@layer base {
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  /* Coordonnées, références, données numériques : police mono */
+  .data-figure {
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+
+  /* Respect des préférences de mouvement réduit */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Focus visible cohérent sur toute l'application */
+  :focus-visible {
+    outline: 2px solid var(--color-beacon);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Tracé pointillé façon route maritime, utilisé dans le hero et les diagrammes */
+  .route-dash {
+    stroke-dasharray: 6 8;
+  }
+}
