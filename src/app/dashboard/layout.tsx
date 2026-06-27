@@ -38,7 +38,7 @@ const adminNav = [
 
 function Sidebar() {
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session } = useSession() ?? {};
   const role = session?.user?.role;
 
   const nav =
